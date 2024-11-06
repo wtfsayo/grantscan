@@ -1,6 +1,7 @@
 "use server";
 
 import handleSearch from "@/actions/handleSearch";
+import HeaderAttribution from "@/components/attribution";
 import { ExternalLink } from "lucide-react";
 import { redirect } from "next/navigation";
 
@@ -72,6 +73,7 @@ export default async function GrantSearch({
       }}
     >
       {/* Search Header Section */}
+      <HeaderAttribution />
       <div className="w-full border-b border-gray-800 backdrop-blur-sm pt-10">
         <div className="max-w-7xl mx-auto py-12 px-4">
           <h1 className="text-3xl font-serif font-bold text-gray-200 mb-8 text-center">
@@ -107,14 +109,13 @@ export default async function GrantSearch({
       {query.trim() && searchResults && (
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="text-sm text-gray-400 mb-6">
-            {searchResults.message ||
-              `Found ${searchResults.count} grant applications`}
+            {`Found ${searchResults.count} grant applications`}
           </div>
 
           <div className="space-y-4">
             {searchResults.results.map((result) => (
               <div
-                key={`${result.projectId}-${result.id}`}
+                key={`${result.projectId}-${result.id}-${Math.floor(Math.random() * 16777215).toString(16)}`}
                 className="bg-[#1E1E1E] border border-gray-800 rounded-lg p-6 backdrop-blur-sm hover:border-gray-700 transition-colors"
               >
                 <div className="flex justify-between items-start mb-6">
