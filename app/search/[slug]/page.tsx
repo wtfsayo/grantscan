@@ -6,7 +6,6 @@ import GetOrgs from "@/actions/getOrgs";
 import GetSearchResults from "@/actions/getSearchResults";
 import SearchInput from "@/components/searchInput";
 import ResultsClient from "@/components/searchResults";
-import { Analytics } from "@vercel/analytics/react";
 
 type tParams = Promise<{ slug: string[] }>;
 
@@ -31,7 +30,6 @@ export default async function GrantSearch(props: { params: tParams }) {
         title="GrantScan"
         description="Indexing all Web3 grant applications ever"
       />
-      <Analytics />
       <HeaderAttribution />
       <SearchInput orgs={orgs} />
       <Suspense fallback={<Loading />}>

@@ -4,6 +4,7 @@ import { useSearchParams, useRouter, useParams } from "next/navigation";
 import handleSearch from "@/actions/handleSearch";
 import Loading from "@/components/loading";
 import { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 interface SearchInputProps {
   orgs: string[];
@@ -29,6 +30,7 @@ export default function SearchInput({ orgs }: SearchInputProps) {
 
   return (
     <div className="w-full border-b border-gray-800 backdrop-blur-sm pt-10">
+      <Analytics />
       <div className="max-w-7xl mx-auto py-12 px-4">
         <h1 className="text-3xl font-serif font-bold text-gray-200 mb-8 text-center">
           GrantScan
