@@ -1,4 +1,3 @@
-"use server";
 import GetOrgs from "@/actions/getOrgs";
 import GetSearchResults from "@/actions/getSearchResults";
 import handleSearch from "@/actions/handleSearch";
@@ -6,6 +5,8 @@ import HeaderAttribution from "@/components/attribution";
 import { ExternalLink } from "lucide-react";
 
 type tParams = Promise<{ slug: string[] }>;
+
+export const dynamicParams = true;
 
 interface FundsData {
   amount: number;
