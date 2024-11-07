@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import { NextSeo } from "next-seo";
+import type { Metadata } from "next";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -13,6 +13,11 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+export const metadata: Metadata = {
+  title: "GrantScan",
+  description: "Indexing all grant applications ever",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,10 +28,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextSeo
-          title="GrantScan"
-          description="Indexing all Web3 grant applications ever"
-        />
         <Analytics />
         {children}
       </body>
