@@ -31,14 +31,18 @@ export default async function GrantSearch() {
             <button className="px-4 py-1.5 rounded-full bg-gray-800 text-gray-300 text-sm hover:bg-gray-700">
               All
             </button>
-            {orgs && orgs.map((org:string, index: number) => (
-              <button key={index} className="px-4 py-1.5 rounded-full bg-[#1E1E1E] text-gray-400 text-sm hover:bg-gray-800">
-                {org}
-              </button>
-            ))}
-
+            {orgs &&
+              orgs.map((org: string, index: number) => (
+                <button
+                  key={index}
+                  className="px-4 py-1.5 rounded-full bg-[#1E1E1E] text-gray-400 text-sm hover:bg-gray-800"
+                >
+                  {org}
+                </button>
+              ))}
           </div>
         </div>
       </div>
     </div>
   );
+}
