@@ -1,3 +1,4 @@
+"use server";
 import GetOrgs from "@/actions/getOrgs";
 import GetSearchResults from "@/actions/getSearchResults";
 import handleSearch from "@/actions/handleSearch";
