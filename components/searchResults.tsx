@@ -34,7 +34,7 @@ function formatDate(dateString: string) {
 }
 
 export default async function SearchResults({ query }: { query: string }) {
-  const searchResults = await GetSearchResults(query == "all" ? "" : query);
+  const searchResults = await GetSearchResults(query == "all" ? "" : query) as SearchResponse;
 
   if (!searchResults) return null;
 
