@@ -65,7 +65,7 @@ export default function ResultsClient({
       <div className="text-sm text-gray-400 mb-6">
         {query === "all"
           ? selectedOrg
-            ? `Showing ${filteredResults.length} results for ${query}`
+            ? `Showing ${filteredResults.length} results for ${query} in ${selectedOrg}`
             : `Showing all ${searchResults.count} results`
           : selectedOrg
             ? `Found ${filteredResults.length} grant applications for "${query}" in ${selectedOrg} grant system`
