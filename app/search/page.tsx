@@ -1,6 +1,5 @@
 import handleSearch from "@/actions/handleSearch";
 import GetOrgs from "@/actions/getOrgs";
-import GetSearchResults from "@/actions/getSearchResults";
 
 export default async function GrantSearch() {
   const orgs = await GetOrgs();
