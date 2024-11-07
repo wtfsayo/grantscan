@@ -1,7 +1,6 @@
 import HeaderAttribution from "@/components/attribution";
 import Loading from "@/components/loading";
 import { Suspense } from "react";
-import { NextSeo } from "next-seo";
 import GetOrgs from "@/actions/getOrgs";
 import GetSearchResults from "@/actions/getSearchResults";
 import SearchInput from "@/components/searchInput";
@@ -26,10 +25,6 @@ export default async function GrantSearch(props: { params: tParams }) {
           "radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 100%)",
       }}
     >
-      <NextSeo
-        title="GrantScan"
-        description="Indexing all Web3 grant applications ever"
-      />
       <HeaderAttribution />
       <SearchInput orgs={orgs} />
       <Suspense fallback={<Loading />}>

@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-
+import { NextSeo } from "next-seo";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -23,6 +23,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <NextSeo
+          title="GrantScan"
+          description="Indexing all Web3 grant applications ever"
+        />
         <Analytics />
         {children}
       </body>
