@@ -2,5 +2,6 @@
 import { DATALAKE_URI } from "@/lib/consts";
 export default async function GetOrgs() {
   const response = await fetch(DATALAKE_URI);
-  return response.json();
+  const orgs = response.json();
+  return orgs;
 }

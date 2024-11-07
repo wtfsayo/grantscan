@@ -1,9 +1,18 @@
+"use client";
+
 import { ExternalLink } from "lucide-react";
-import GetSearchResults from "@/actions/getSearchResults";
+import { useSearchParams } from "next/navigation";
 
 interface FundsData {
   amount: number;
   denomination: string;
+}
+
+interface SearchResultMetadata {
+  grantPoolId: string;
+  grantPoolName: string;
+  grantSystem: string;
+  sourceFile: string;
 }
 
 interface SearchResult {
@@ -16,6 +25,7 @@ interface SearchResult {
   id: string;
   projectId: string;
   projectName: string;
+  metadata: SearchResultMetadata;
 }
 
 interface SearchResponse {
@@ -33,24 +43,40 @@ function formatDate(dateString: string) {
   });
 }
 
-export default async function SearchResults({ query }: { query: string }) {
-  const searchResults = await GetSearchResults(query == "all" ? "" : query) as SearchResponse;
+export default function ResultsClient({
+  searchResults,
+  query,
+}: {
+  searchResults: SearchResponse;
+  query: string;
+}) {
+  const searchParams = useSearchParams();
+  const selectedOrg = searchParams?.get("org");
 
-  if (!searchResults) return null;
+  // Filter results based on selected organization
+  const filteredResults = selectedOrg
+    ? searchResults.results.filter(
+        (result) => result?.metadata?.grantSystem === selectedOrg,
+      )
+    : searchResults.results;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
       <div className="text-sm text-gray-400 mb-6">
-        {query == "all"
-          ? `Showing all ${searchResults.count} results`
-          : `Found ${searchResults.count} grant applications`}
+        {query === "all"
+          ? selectedOrg
+            ? `Showing ${filteredResults.length} results for ${query}`
+            : `Showing all ${searchResults.count} results`
+          : selectedOrg
+            ? `Found ${filteredResults.length} grant applications for "${query}" in ${selectedOrg} grant system`
+            : `Found ${searchResults.count} grant applications for "${query}"`}
       </div>
 
       <div className="space-y-4">
-        {searchResults.results.map((result) => (
+        {filteredResults.map((result) => (
           <div
             key={`${result.projectId}-${result.id}-${Math.floor(Math.random() * 16777215).toString(16)}`}
-            className="bg-[#1E1E1E] border border-gray-800 rounded-lg p-6 backdrop-blur-sm hover:border-gray-700 transition-colors"
+            className="bg-gray-900 border border-gray-800 rounded-lg p-6 backdrop-blur-sm hover:border-gray-700 transition-colors"
           >
             <div className="flex justify-between items-start mb-6">
               <h3 className="text-xl font-medium text-gray-200">
@@ -104,7 +130,9 @@ export default async function SearchResults({ query }: { query: string }) {
 
               <div className="space-y-3 text-sm">
                 <div className="flex items-start gap-2">
-                  <span className="text-gray-500 min-w-32">Funds Approved:</span>
+                  <span className="text-gray-500 min-w-32">
+                    Funds Approved:
+                  </span>
                   <span>
                     {result.fundsApproved[0]?.amount.toLocaleString() ?? 0}{" "}
                     {result.fundsApproved[0]?.denomination ?? ""}
