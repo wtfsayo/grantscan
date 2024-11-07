@@ -1,5 +1,6 @@
 "use server";
 import GetOrgs from "@/actions/getOrgs";
+import GetSearchResults from "@/actions/getSearchResults";
 import handleSearch from "@/actions/handleSearch";
 import HeaderAttribution from "@/components/attribution";
 import { ExternalLink } from "lucide-react";
@@ -39,19 +40,12 @@ function formatDate(dateString: string) {
 export default async function GrantSearch({
   params,
 }: {
-  params: { query: string };
+  params: { query?: string };
 }) {
   // Convert hyphenated URL back to spaces for display and search
-  const query = params?.query ? params?.query.replace(/-+/g, " ") : " ";
+  const query = params?.query ? params?.query?.replace(/-+/g, " ") : "";
   let searchResults: SearchResponse | null = null;
-
-  if (query.trim()) {
-    // Use the space-formatted query for the actual search
-    const response = await fetch(
-      `http://localhost:3000/search/${encodeURIComponent(query)}`,
-    );
-    searchResults = await response.json();
-  }
+  searchResults = await GetSearchResults(query == "all" ? "" : query);
 
   const orgs = await GetOrgs();
 
@@ -75,7 +69,7 @@ export default async function GrantSearch({
               type="text"
               name="query"
               placeholder="Search Projects"
-              defaultValue={query}
+              defaultValue={query === "all" ? "" : query}
               className="w-full bg-[#1E1E1E] border border-gray-700 rounded-lg px-6 py-3 text-gray-300 focus:outline-none focus:border-gray-600 text-lg"
             />
           </form>
@@ -96,11 +90,12 @@ export default async function GrantSearch({
         </div>
       </div>
 
-      {/* Results Section - Only shown when there's a query */}
-      {query.trim() && searchResults && (
+      {searchResults && (
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="text-sm text-gray-400 mb-6">
-            {`Found ${searchResults.count} grant applications`}
+            {query == "all"
+              ? `Showing all ${searchResults.count} results`
+              : `Found ${searchResults.count} grant applications`}
           </div>
 
           <div className="space-y-4">
