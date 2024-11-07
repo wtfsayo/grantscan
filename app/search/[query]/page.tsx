@@ -1,9 +1,8 @@
 "use server";
-
+import GetOrgs from "@/actions/getOrgs";
 import handleSearch from "@/actions/handleSearch";
 import HeaderAttribution from "@/components/attribution";
 import { ExternalLink } from "lucide-react";
-import { redirect } from "next/navigation";
 
 interface FundsData {
   amount: number;
@@ -54,15 +53,7 @@ export default async function GrantSearch({
     searchResults = await response.json();
   }
 
-  async function submitSearch(formData: FormData) {
-    "use server";
-    const result = await handleSearch(formData);
-    if (result.searchTerm) {
-      redirect(`/search/${result.searchTerm}`);
-    } else {
-      redirect("/search/");
-    }
-  }
+  const orgs = await GetOrgs();
 
   return (
     <div
@@ -79,7 +70,7 @@ export default async function GrantSearch({
           <h1 className="text-3xl font-serif font-bold text-gray-200 mb-8 text-center">
             GrantScan
           </h1>
-          <form action={submitSearch} className="max-w-3xl mx-auto">
+          <form action={handleSearch} className="max-w-3xl mx-auto">
             <input
               type="text"
               name="query"
@@ -92,15 +83,15 @@ export default async function GrantSearch({
             <button className="px-4 py-1.5 rounded-full bg-gray-800 text-gray-300 text-sm hover:bg-gray-700">
               All
             </button>
-            <button className="px-4 py-1.5 rounded-full bg-[#1E1E1E] text-gray-400 text-sm hover:bg-gray-800">
-              RetroPGF
-            </button>
-            <button className="px-4 py-1.5 rounded-full bg-[#1E1E1E] text-gray-400 text-sm hover:bg-gray-800">
-              Grants
-            </button>
-            <button className="px-4 py-1.5 rounded-full bg-[#1E1E1E] text-gray-400 text-sm hover:bg-gray-800">
-              Missions
-            </button>
+            {orgs &&
+              orgs.map((org: string, index: number) => (
+                <button
+                  key={index}
+                  className="px-4 py-1.5 rounded-full bg-[#1E1E1E] text-gray-400 text-sm hover:bg-gray-800"
+                >
+                  {org}
+                </button>
+              ))}
           </div>
         </div>
       </div>
