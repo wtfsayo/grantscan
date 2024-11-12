@@ -76,7 +76,7 @@ export default function ResultsClient({
         {filteredResults.map((result) => (
           <div
             key={`${result.projectId}-${result.id}-${Math.floor(Math.random() * 16777215).toString(16)}`}
-            className="bg-gray-900 border border-gray-800 rounded-lg p-6 backdrop-blur-sm hover:border-gray-700 transition-colors"
+            className="bg-gray-900 border border-gray-800 rounded-lg p-6 lg:backdrop-blur-sm hover:border-gray-700 transition-colors"
           >
             <div className="flex justify-between items-start mb-6">
               <h3 className="text-xl font-medium text-gray-200">

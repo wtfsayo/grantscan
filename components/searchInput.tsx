@@ -30,7 +30,7 @@ export default function SearchInput({ orgs }: SearchInputProps) {
   };
 
   return (
-    <div className="w-full border-b border-gray-800 backdrop-blur-sm pt-10">
+    <div className="w-full border-b border-gray-800 lg:backdrop-blur-sm pt-10">
       <Analytics />
       <div className="max-w-7xl mx-auto py-12 px-4">
         <h1 className="text-3xl font-serif font-bold text-gray-200 mb-8 text-center">
@@ -41,7 +41,9 @@ export default function SearchInput({ orgs }: SearchInputProps) {
             type="text"
             name="query"
             placeholder="Search Projects"
-            defaultValue={query === "all" ? "" : query}
+            defaultValue={
+              query === "all" ? "" : query.toString().replace("-", " ")
+            }
             className="w-full bg-gray-900 border border-gray-700 rounded-lg px-6 py-3 text-gray-300 focus:outline-none focus:border-gray-600 text-lg pr-12"
           />
           <button
