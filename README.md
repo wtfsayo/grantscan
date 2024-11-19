@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Overview
 
-## Getting Started
+GrantScan is a specialized search engine that indexes and tracks the history of grant applications across the Web3 ecosystem. By combining Opensource Observer's historical data with DAOstar's DAOIP5 standard, we create the first comprehensive, searchable database of Web3 grant applications history.
 
-First, run the development server:
+# Problem Statement
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Currently in Web3:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Grant applications are scattered across multiple platforms
+- There's no way to track an applicant's previous grant attempts
+- Historical application data is not standardized or easily accessible
+- Grant providers can't verify applicants' previous funding history
+- Duplicate grant applications across different DAOs are hard to detect
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Solution
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+GrantScan creates a unified view of grant application history by:
 
-## Learn More
+- **Opensource Observer**: Provides historical grant application data across the ecosystem
+- **DAOstar x DAOIP5**: Ensures standardized format for all indexed applications
 
-To learn more about Next.js, take a look at the following resources:
+# Try It Now
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Don't be lazy, try right now: [https://grantscan.vercel.app](https://grantscan.vercel.app)
