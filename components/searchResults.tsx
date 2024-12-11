@@ -2,6 +2,8 @@
 
 import { ExternalLink } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import sdk, { type FrameContext } from "@farcaster/frame-sdk";
 
 interface FundsData {
   amount: number;
@@ -59,6 +61,23 @@ export default function ResultsClient({
         (result) => result?.metadata?.grantSystem === selectedOrg,
       )
     : searchResults.results;
+
+  // make sure frames v2 sdk is loaded
+  const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const [context, setContext] = useState<FrameContext>();
+
+  useEffect(() => {
+    const load = async () => {
+      setContext(await sdk.context);
+      sdk.actions.ready();
+    };
+    if (sdk && !isSDKLoaded) {
+      setIsSDKLoaded(true);
+      load();
+    }
+  }, [isSDKLoaded]);
+
+  console.log(context);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">

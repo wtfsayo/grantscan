@@ -1,7 +1,10 @@
-import localFont from "next/font/local";
 import "./globals.css";
+
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
+import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -15,7 +18,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "GrantScan",
-  description: "Indexing all grant applications ever",
+  description: "GrantScan | Indexing all grant applications ever ",
 };
 
 export default function RootLayout({
@@ -28,8 +31,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Analytics />
-        {children}
+        <Providers>
+          <Analytics />
+          {children}
+        </Providers>
       </body>
     </html>
   );

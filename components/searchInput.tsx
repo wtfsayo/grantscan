@@ -35,7 +35,11 @@ export default function SearchInput({ orgs }: SearchInputProps) {
       <div className="max-w-7xl mx-auto py-12 px-4">
         <h1 className="text-3xl font-serif font-bold text-gray-200 mb-8 text-center">
           GrantScan
+          <p className="text-sm font-sans font-light">
+            Indexing all grant applications ever
+          </p>
         </h1>
+
         <form action={handleSearch} className="max-w-3xl mx-auto relative">
           <input
             type="text"
