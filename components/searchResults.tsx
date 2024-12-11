@@ -3,7 +3,7 @@
 import { ExternalLink } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import sdk from "@farcaster/frame-sdk";
+import sdk, { type FrameContext } from "@farcaster/frame-sdk";
 
 interface FundsData {
   amount: number;
@@ -64,9 +64,11 @@ export default function ResultsClient({
 
   // make sure frames v2 sdk is loaded
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const [context, setContext] = useState<FrameContext>();
 
   useEffect(() => {
     const load = async () => {
+      setContext(await sdk.context);
       sdk.actions.ready();
     };
     if (sdk && !isSDKLoaded) {
@@ -74,6 +76,8 @@ export default function ResultsClient({
       load();
     }
   }, [isSDKLoaded]);
+
+  console.log(context);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
