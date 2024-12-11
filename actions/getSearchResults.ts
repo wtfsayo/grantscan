@@ -6,7 +6,8 @@ export default async function GetSearchResults(query: string) {
       `${DATALAKE_URI}/search/${query === "all" ? "" : query}`,
       {
         next: {
-          revalidate: 3600 // revalidate every hour
+          revalidate: 3600, // revalidate every hour
+          tags: ["search", query]
         }
       }
     );

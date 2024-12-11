@@ -4,7 +4,8 @@ export default async function GetOrgs() {
   try {
     const response = await fetch(DATALAKE_URI, {
       next: {
-        revalidate: 3600 // revalidate every hour
+        revalidate: 3600, // revalidate every hour
+        tags: ["orgs"]
       }
     });
     

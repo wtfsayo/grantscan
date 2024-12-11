@@ -5,7 +5,8 @@ export default async function GetRounds(org: string) {
   try {
     const response = await fetch(`${DATALAKE_URI}/${org}`, {
       next: {
-        revalidate: 3600 // revalidate every hour
+        revalidate: 3600, // revalidate every hour
+        tags: ["rounds", org]
       }
     });
 
