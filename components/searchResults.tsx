@@ -2,6 +2,8 @@
 
 import { ExternalLink } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import sdk from "@farcaster/frame-sdk";
 
 interface FundsData {
   amount: number;
@@ -59,6 +61,19 @@ export default function ResultsClient({
         (result) => result?.metadata?.grantSystem === selectedOrg,
       )
     : searchResults.results;
+
+  // make sure frames v2 sdk is loaded
+  const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+
+  useEffect(() => {
+    const load = async () => {
+      sdk.actions.ready();
+    };
+    if (sdk && !isSDKLoaded) {
+      setIsSDKLoaded(true);
+      load();
+    }
+  }, [isSDKLoaded]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
